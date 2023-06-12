@@ -20,7 +20,6 @@ impl DisplayBrightness {
         file.write_all(adjusted_brightness.to_string().as_bytes())?;
         Ok(())
     }
-    
 
     pub fn get_brightness(&self) -> Result<u8, Error> {
         let mut file = std::fs::File::open(&self.path)?;
@@ -30,8 +29,9 @@ impl DisplayBrightness {
             Ok(value) => value,
             Err(_) => return Err(Error::new(ErrorKind::InvalidData, "Invalid brightness value")),
         };
-        let adjusted_brightness = brightness * 100 / 255 + 1; // Convert 0-255 range to 1-100
+        let adjusted_brightness = brightness * 100 / 255; // Convert 0-255 range to 0-100
         Ok(adjusted_brightness)
     }
 }
+
 
