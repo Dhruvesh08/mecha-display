@@ -1,6 +1,4 @@
-use std::fs::File;
-use std::io::{Error, Read, Write};
-use std::path::Path;
+use std::io::{Error, Write, Read};
 
 pub struct DisplayBrightness {
     path: String,
@@ -15,15 +13,13 @@ impl DisplayBrightness {
 
     pub fn set_brightness(&self, brightness: u8) -> Result<(), Error> {
         let adjusted_brightness = brightness * 255 / 100; // Convert 0-100 range to 0-255
-        let path = Path::new(&self.path);
-        let mut file = File::create(path)?;
+        let mut file = std::fs::File::create(&self.path)?;
         file.write_all(adjusted_brightness.to_string().as_bytes())?;
         Ok(())
     }
 
     pub fn get_brightness(&self) -> Result<u8, Error> {
-        let path = Path::new(&self.path);
-        let mut file = File::open(path)?;
+        let mut file = std::fs::File::open(&self.path)?;
         let mut buffer = String::new();
         file.read_to_string(&mut buffer)?;
         let brightness: u8 = buffer.trim().parse().unwrap();
@@ -31,3 +27,5 @@ impl DisplayBrightness {
         Ok(adjusted_brightness)
     }
 }
+
+
