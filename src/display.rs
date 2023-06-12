@@ -34,6 +34,7 @@ impl DisplayBrightness {
             }
         };
         println!("Get Brightness: {}", brightness * (100 as u8) / 255 as u8);
-        Ok(brightness)
+        let adjusted_brightness = brightness * (100 as u8) / 255 as u8;
+        Ok(adjusted_brightness)
     }
 }
