@@ -1,4 +1,4 @@
-use std::io::{Error, Write, Read};
+use std::io::{Error, ErrorKind, Write, Read};
 
 pub struct DisplayBrightness {
     path: String,
@@ -22,10 +22,12 @@ impl DisplayBrightness {
         let mut file = std::fs::File::open(&self.path)?;
         let mut buffer = String::new();
         file.read_to_string(&mut buffer)?;
-        let brightness: u8 = buffer.trim().parse().unwrap();
-        let adjusted_brightness = brightness * 100 / 255; // Convert 0-255 range to 0-100
+        let brightness: u8 = match buffer.trim().parse() {
+            Ok(value) => value,
+            Err(_) => return Err(Error::new(ErrorKind::InvalidData, "Invalid brightness value")),
+        };
+        let adjusted_brightness = brightness * 100 / 255 + 1; // Convert 0-255 range to 1-100
         Ok(adjusted_brightness)
     }
 }
-
 
