@@ -14,13 +14,13 @@ impl DisplayBrightness {
     pub fn set_brightness(&self, brightness: u8) -> Result<(), Error> {
         let adjusted_brightness = brightness * 255 / 100; // Convert 0-100 range to 0-255
         let mut file = std::fs::File::create(&self.path)?;
-        print!("Setting brightness to: {}  input {}", adjusted_brightness,brightness);
-        print!("Writing to file: {}", self.path);
-        //print input to file
-        print!("Brightness: {}", adjusted_brightness.to_string());
-        file.write(adjusted_brightness.to_string().as_bytes())?;
+        println!("Setting brightness to: {} (input: {}) \n", adjusted_brightness, brightness);
+        println!("Writing to file: {}\n", self.path);
+        println!("Brightness: {}\n", adjusted_brightness);
+        file.write_all(adjusted_brightness.to_string().as_bytes())?;
         Ok(())
     }
+    
 
     pub fn get_brightness(&self) -> Result<u8, Error> {
         let mut file = std::fs::File::open(&self.path)?;
