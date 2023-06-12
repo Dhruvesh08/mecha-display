@@ -8,10 +8,10 @@ inherit cargo
 # how to get mecha-display could be as easy as but default to a git checkout:
 # SRC_URI += "crate://crates.io/mecha-display/0.1.0"
 SRC_URI += "git://github.com/Dhruvesh08/mecha-display.git;protocol=https;nobranch=1;branch=main"
-SRCREV = "3d7ea616d4ab929f8505cf6780ebb9f32dfa65f0"
+SRCREV = "3da92d1d5e0efdedabed7a339a962aa4b8af37bf"
 S = "${WORKDIR}/git"
 CARGO_SRC_DIR = ""
-PV:append = ".AUTOINC+3d7ea616d4"
+PV:append = ".AUTOINC+3da92d1d5e"
 
 # please note if you have entries that do not begin with crate://
 # you must change them to how that package can be fetched
