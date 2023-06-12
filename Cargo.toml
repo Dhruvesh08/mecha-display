@@ -2,6 +2,8 @@
 name = "mecha-display"
 version = "0.1.0"
 edition = "2021"
+repository = "https://github.com/Dhruvesh08/mecha-display"
+homepage = "https://github.com/Dhruvesh08/mecha-display"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
