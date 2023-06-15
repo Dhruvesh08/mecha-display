@@ -1,19 +1,15 @@
-use std::io::{Error};
-
-use display::DisplayBrightness;
 mod display;
+use display::{Display, DisplayInterface};
 
+fn main() {
+    let mut display = Display {
+        path: String::new(),
+    };
 
-fn main() -> Result<(), Error> {
-    let display_brightness = DisplayBrightness::new();
-    display_brightness.set_brightness(50)?;
-
-    println!("Brightness: {}", display_brightness.get_brightness()?);
-
-    //sleep for 0.5 seconds`
-    std::thread::sleep(std::time::Duration::from_millis(500));
-
-    display_brightness.set_brightness(100)?;
-    println!("Brightness: {}", display_brightness.get_brightness()?);
-    Ok(())
+    display.set_device("/sys/class/backlight/backlight/brightness");
+    display.set_brightness(50).unwrap();
+    display.info();
+    let brightness = display.get_brightness().unwrap();
+    println!("Brightness: {}", brightness);
+    println!("Device: {}", display.get_device());
 }
